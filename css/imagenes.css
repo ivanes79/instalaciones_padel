@@ -1,0 +1,52 @@
+.imagenes {
+    display: flex;
+    margin: 20px 0px;
+}
+
+.imagen {
+    padding: 0% 2%;
+	flex: 1;
+}
+
+.instalacionespadel {
+    text-align: center;
+}
+
+
+
+.instalacionespadel img{
+	width: 31%;
+	margin: 3px;
+	border: solid #f07ad4;
+}
+
+.anchura100 img{
+	width: 30%;
+	text-align: center;
+    padding-top: 5px;
+	
+}
+
+.anchura100 {
+	width: 100%;
+	text-align: center;
+}
+.anchura90 {
+	width: 60%;
+}
+.imagentablaclientes{
+	width:60%
+}
+.anchura70 {
+	width: 70%;
+}
+.anchura150 {
+	width: 20%;
+} 
+.anchura150 {
+	width: 20%;
+}
+
+.anchura160 {
+	width: 120%;
+}

@@ -1,0 +1,98 @@
+<script src="jquery/jquery-3.6.0.js"></script>
+<nav>
+	<div class='logo'>
+		<img src='images/logo instalacion.jpg' class='anchura110'>
+    </div>
+    <div>
+        <ul class='menu'>
+            <li><a href='clientes.php'> CLIENTES </a></li>
+            <li><a href='profesores.php'> PROFESORES </a></li>
+            <li><a href='cursos.php'> CURSOS </a></li>
+            <li><a href='pistas.php'> PISTAS </a></li>
+            <li><a href='instalaciones2.php'> INSTALACIONES </a></li>
+        </ul>
+    </div>
+</nav>
+<div class='buscador'>
+	<input type='text'name='buscar' placeholder='tu búsqueda' class='busqueda' />
+</div>
+<script>
+    $( function() {
+        
+        $( ".buscador" ).on( { 
+            "keypress": function( event ) {
+                if (event.key === 'Enter') { 
+                    let busqueda = $( this ).children().val();
+                        console.log( event );
+                        console.log( busqueda );
+                            datos =	{	"accion" : "buscar", 
+                                        "busqueda" : busqueda, 
+                                    }	
+                            $.ajax ( {
+                                type: "POST",
+                                url: "ajax/controladorAJAX.php",
+                                data: datos,
+                                error: function() {
+                                    alert ( "Se ha producido un error." );
+                                },
+                                success: function ( data, textStatus ) {
+                                    let arDataCurso;
+                                    console.log( data );
+                                    arDataBusqueda = JSON.parse( data );
+                                    console.log( arDataCurso );
+                                    switch ( arDataBusqueda[ "status" ][ "codError" ] ) {
+                                        case "000":
+                                        case "001":
+                                            table = "<div class='overlay'>";
+                                            table+=		"<div class='subwrapper1'>";
+                                            table+= 		arDataBusqueda["data"];
+                                            table+= 	"</div>";
+                                            table+= "</div>";
+                                            $( "body" ).append( table );
+                                            
+                                            $( ".overlay" ).on( { 
+                                                "click": function(event) {
+                                                    if ( event.target === event.currentTarget ) {
+                                                            console.log( "ocultamos" );
+                                                            $( this ).remove();
+                                                        }
+                                                    //
+                                                    $( ".buscador input[ name='buscar' ]" ).val( "" );
+                                                }	
+                                             });
+                                             
+                                        break;
+                                        case "002":
+                                        break;
+                                        default:
+                                    }
+                                }
+
+                            })    
+                        
+                }    
+
+                  
+            }
+        })
+
+        $( "div.logo" ).on( { 
+            "click": function( event ) {
+                let a=document.getElementById('enlace');
+                    //a.addEventListener('click',function (event) {
+                    event.preventDefault(); //esto cancela el comportamiento del click
+                     location.href="main.php";
+                    }
+
+
+
+                //$("main.php").trigger("click")
+                        //console.log( event );
+
+
+
+            
+        })
+
+    })		
+</script>
